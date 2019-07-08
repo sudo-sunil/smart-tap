@@ -1,0 +1,63 @@
+/* digitalWrite(triggerPort, LOW);			// set to LOW trigger's output
+  digitalWrite(triggerPort, HIGH);		// send a 10us pulse to the trigger
+  delayMicroseconds( 10 );
+  digitalWrite(triggerPort, LOW);*/
+ 
+  //long duration = pulseIn(echoPort, HIGH);
+ 
+ // long r = 3.4 * duration / 2;			// here we calculate the distance using duration
+ /* do
+  { 
+    Serial.println("do");
+    while(i<=7)
+    {digitalWrite(4,LOW);
+    delayMicroseconds(500);
+    digitalWrite(4,HIGH);
+    delayMicroseconds(1000);
+     long duration = pulseIn(echoPort, HIGH);
+ 
+     long r = 3.4 * duration / 2; 
+    float distance = r / 100.00;
+      arr[i]=distance;
+      i=i+1;  
+      Serial.println("while");
+    }
+    if(i=7)
+    {
+       while(j<=7)
+      {
+          q=int(arr[j])-int(arr[j+1]);
+          if(q<0)
+          {
+            q=q*(-1);
+          }
+          if(q<2)
+          {
+             flag=flag+1;
+          }
+          else
+          {
+             continue;
+          }
+          Serial.println("while2");
+       j++;
+      }
+    }
+    i++;
+  }while(flag<=5);
+*/
+
+/*here:
+  if(flag>=5)
+  {
+  for(int i=1;i<11;i++)
+  {
+    digitalWrite(7,HIGH);
+    delay(500);
+    digitalWrite(7,LOW);
+    delay(500);
+  }
+ }
+
+ float distance = r / 100.00;
+*/

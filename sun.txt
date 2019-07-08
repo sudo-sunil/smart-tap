@@ -1,0 +1,60 @@
+#include<Servo.h>           //Servo library
+ 
+Servo servo_test;        //initialize a servo object for the connected servo  
+                
+int angle = 0;    
+int triggerPort =5;
+int echoPort = 4;
+ 
+ 
+void setup() 
+{ 
+	pinMode( triggerPort, OUTPUT );//atrigger port of udm
+	pinMode( echoPort, INPUT );//echo port of udm
+	servo_test.attach(9);// attach the signal pin of servo to pin9 of arduino
+	Serial.begin( 115200 );
+} 
+
+
+void loop() {
+	digitalWrite(triggerPort, LOW);			// set to LOW trigger's output
+	digitalWrite(triggerPort, HIGH);		// send a 10us pulse to the trigger
+	delayMicroseconds( 10 );
+	digitalWrite(triggerPort, LOW);
+ 
+	long duration = pulseIn(echoPort, HIGH);
+ 
+	long r = 3.4 * duration / 2;			// here we calculate the distance using duration
+
+	float distance = r / 100.00;
+
+ 
+	Serial.print("duration: ");
+	Serial.print(duration);
+	Serial.print(" , ");
+	Serial.print("distance: ");
+ 
+
+	if( duration > 38000 ) Serial.println("out of reach");		// if duration in greather than 38ms, the obstacle is out of reach
+	else { Serial.print(distance); Serial.println("cm");}
+ 
+
+	delay( 1000 );							// wait for 1s
+
+	for(angle = 0; angle < 90; angle += 1)    // command to move from 0 degrees to 180 degrees 
+	{                                  
+		servo_test.write(angle);                 //command to rotate the servo to the specified angle
+		delay(15);                       
+	} 
+ 
+	delay(1000);
+  
+	for(angle = 90; angle>=1; angle-=5)     // command to move from 180 degrees to 0 degrees 
+	{                                
+		servo_test.write(angle);              //command to rotate the servo to the specified angle
+		delay(5);                       
+	} 
+
+	delay(100);
+
+}

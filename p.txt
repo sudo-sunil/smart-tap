@@ -1,0 +1,80 @@
+
+if(Firebase.getString("status")== ON)
+{
+	if(flag==0)
+	{
+		 for (pos = 90; pos >= 0; pos -= 1) 
+      { // goes from 180 degrees to 0 degrees
+           servo.write(pos);              // tell servo to go to position in variable 'pos'
+          delay(15);                       // waits 15ms for the servo to reach the position
+      }
+	flag=1;
+	}
+*********      for(i=0;i<=5;i++)
+      {
+          digitalWrite(triggerPort,LOW);
+          delayMicroseconds(5);
+          digitalWrite(triggerPort,HIGH);
+          delayMicroseconds(10);
+          int dur = pulseIn(echoPort,HIGH);
+          float dist = dur*0.034/2; 
+          Serial.println(dist);
+          arr[i] = dist;
+              
+          delay(1000);
+      }	
+      
+      a=arr[0];
+      b=arr[1];
+      c=arr[2];
+      d=a-b;
+      e=b-c;
+      if(e<2)
+      {
+          if(d<2)
+          {//stop the flow
+            
+              for(pos = 0; pos <= 90; pos += 1)    // command to move from 0 degrees to 180 degrees 
+              {                                  
+                    servo.write(pos);                 //command to rotate the servo to the specified angle
+                    delay(15);                       
+              } 
+		Firebase.setString("status")=OFF;
+             int flag=0;
+             Serial.println("Finish1");
+           
+          }
+      }
+      else
+      {
+          a=arr[2];
+          b=arr[3];
+          c=arr[4];
+          d=a-b;
+          e=b-c;
+          if(e<2)
+          {
+                  //stop water
+                  if(d<2)
+                  {
+               
+                  //Serial.println("motor2");
+                   for(pos = 0; pos <=90; pos += 1)    // command to move from 0 degrees to 180 degrees 
+                  {                                  
+                      servo.write(pos);                 //command to rotate the servo to the specified angle
+                      delay(15);                       
+                  } 
+		Firebase.setString("status")=OFF;
+             int flag=0;
+                   Serial.println("Finish2");
+                  
+                  }
+           }
+              
+   }
+  Serial.println(arr[4]);
+ // Firebase.setFloat("height",arr[4]);
+  Serial.println("Finish3");
+
+
+
